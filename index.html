@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <script src="./js/kendo/jquery.min.js"> </script>
+    <script src="./js/kendo/kendo.dataviz.min.js"></script>
+    <script src="./js/kendo/kendo.mobile.min.js"></script>
+    <script src="./content/shared/js/console.js"></script>
+    
+    <link href="./styles/kendo/kendo.mobile.all.min.css"  rel="stylesheet" />
+    <link href="./content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="./styles/kendo/kendo.common.min.css" rel="stylesheet">
+    <link href="./styles/kendo/kendo.default.min.css" rel="stylesheet">
+    <link href="./styles/kendo/kendo.dataviz.min.css" rel="stylesheet">
+    <link href="./styles/kendo/kendo.dataviz.default.min.css" rel="stylesheet"> 
+ 
+    <script src="./js/configuration.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/movie-tickets.js"></script>
+    <script src="./js/user-account.js"></script>
+    <script src="./js/data-access.js"></script>
+    
+    <style>
+			.no-backbutton .km-back { visibility: hidden; }
+		</style>
+</head>
+<body>
+    <div data-role="view" data-title="分析图表"
+         id="mt-home-main-view" 
+         data-model="MovieTickets.userAccount.viewModel" 
+         data-layout="mt-main-layout" data-show="homeViewInit" class="no-backbutton">
+         
+				<input type="text" data-bind="value:isUserLoggedIn" id="IsUserLoggedIn" style="display:none" />
+        <input type="text" data-bind="value:userSelectBranch" id="userSelectBranch" style="display:none"/> 
+         
+				<ul data-role="listview" data-style="inset" data-type="group">
+          <li>
+            <ul>
+            	<li data-icon="toprated"><a id="pie-charts">pie-charts</a></li>
+              <li data-icon="toprated"><a id="bar-charts">bar-charts</a></li>
+              <li data-icon="toprated"><a id="line-charts">line-charts</a></li>
+          	</ul>
+          </li>
+        </ul>
+    </div>
+    
+    <div data-role="layout" data-id="mt-main-layout">
+        <header data-role="header">
+            <div data-role="navbar">
+            		<a data-role="backbutton" data-align="left">退回</a>
+                <span data-role="view-title">报表系统-行动版</span>
+            </div>
+        </header>
+
+        <footer data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#mt-home-main-view">
+                    <img src="images/movies.ico" height="40" width="40" /><br />
+                    分析图表
+                </a>
+                <a href="UserAccount.html">
+                    <img src="images/user_profile.ico" />
+                    我的帐户
+                </a>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+				//Kendo Mobile is initialized in this method
+        var app = MovieTickets.main.initializeApp();				
+				
+				$("a").click(function() {
+					var flag = $("#IsUserLoggedIn").val();
+			
+					//console.log(this.id);
+					//console.log(flag);
+				
+					if(flag == "true")
+					{
+					  //console.log(this.id + ".html");
+					  //window.alert(this.id + ".html");
+					  MovieTickets.common.navigateToView(this.id + ".html");						
+					}
+					else
+					{
+					  //console.log(this.id + ".html");
+					  //window.alert("UserAccount.html");
+					  MovieTickets.common.navigateToView("UserAccount.html");
+					  //MovieTickets.common.navigateToView(this.id + ".html");	
+					}
+				});
+    </script>
+
+    <script type="text/x-kendo-template" id="usracc-booking-history-tmpl">
+        Movie:
+        <span class="valueText"> #=MovieName #</span>
+        Tickets:
+        <span class="valueText"> #=NoOfPersons # </span>
+        <br />
+        Theater:
+        <span class="valueText"> #=TheaterName # </span>
+        <br />
+        Screen:
+        <span class="valueText">#=Screen # </span>
+
+        Show Date:
+        <span class="valueText"> #=ShowDate# </span>
+        <br />
+        Time:
+        <span class="valueText">#=ShowTime # </span>
+    </script>
+</body>
+</html>

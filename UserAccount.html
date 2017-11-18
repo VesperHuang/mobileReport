@@ -1,0 +1,78 @@
+﻿<div data-role="view" data-layout="mt-main-layout"
+     data-title="我的帐户"
+     data-model="MovieTickets.userAccount.viewModel"
+     id="mt-theaters-view">
+     
+    <!-- This section is bound by Kendo MVVM Invisible binding -->
+    <div id="usracc-login-section"
+         data-bind="invisible: isUserLoggedIn">
+    </div>
+    
+    <div id="usracc-user-details"
+         data-bind="visible: isUserLoggedIn">
+    </div>
+				<ul data-role="listview" data-style="inset" data-type="group">
+          <li>
+            <ul>
+            	<li data-icon="globe">
+              	<label>帐 号: </label>
+              	<input type="text" data-bind="value:userName" id="user-acc-username" />            	
+            	</li>
+              
+              <li data-icon="globe">
+              	<label>密 码: </label>
+              	<input type="text" id="user-acc-password"  data-bind="value:password" />              
+              </li>
+          	</ul>
+          </li>
+        </ul>
+        
+    <div class="centerAlign">
+        <a data-role="button" id="user-acc-login-button"
+           data-bind="click:userLogin">登 入</a>
+    </div>
+    <br/>
+    <div id="usracc-user-details" data-bind="visible: isUserLoggedIn">
+        <div>        
+    				<ul data-role="listview" data-style="inset" data-type="group">
+              <li>
+                <ul>
+                	<li data-icon="globe">
+                  	<label>First Name: </label>
+                  	<input type="text" id="usracc-firstName" data-bind="value: firstName" />        	
+                	</li>
+                  
+                  <li data-icon="globe">
+                  	<label>Last Name: </label>
+                  	<input type="text" id="usracc-lastName" data-bind="value: lastName" />             
+                  </li>
+              	</ul>
+              </li>
+             </ul>
+                          
+						 <ul data-role="listview" data-style="inset" id="usracc-branchs-list" 
+						     data-type="group"
+						     data-template="BranchTemplate"
+                 data-bind="source: userBranchs"></ul>      
+        </div>
+
+        <br />        
+        <!--Booking History section-->
+        <div style="display:none">
+            <h3>Booking History </h3>
+            <!--Render template using MVVM Source binding -->
+            <ul data-role="listview" data-style="inset"
+                id="usracc-bkng-hstry-list"
+                data-template="usracc-booking-history-tmpl"
+                data-bind="source: userBookingHistory"></ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="BranchTemplate">
+  	<label>
+  			Selected Value: <span data-bind="text:userSelectBranch"></span>  
+     		<input type="radio" data-bind="attr:{name:radio, value:ID}, checked:userSelectBranch" />
+  			<h3>#=Name #</h3>
+  	</label>
+</script>

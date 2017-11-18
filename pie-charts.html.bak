@@ -1,0 +1,66 @@
+<div data-role="view" data-title="pie-charts" data-layout="mt-main-layout" id="mt-piecharts-view">
+	
+		<div>
+	  	<ul>
+        <li>
+            <label>
+                Type date
+                <input type="date" value="2012-03-22" />
+            </label>
+        </li>	  		
+	  	</ul>		
+		</div>
+	
+    <div class="chart-wrapper">
+        <div id="piecharts" style="background: center no-repeat url('/content/shared/styles/world-map.png');"></div>
+    </div>
+
+    <script>
+      function createPieCharts() {
+      
+          $("#piecharts").kendoChart({
+            dataSource: {
+                transport: {
+                    read: {
+                        url:"http://180.166.253.196:84/api/Report/PieCharts/",
+                        dataType: "json"
+                    }
+                 }
+             },
+              title: {
+                  position: "bottom",
+                  text: "Share of Internet Population Growth, 2007 - 2012"
+              },
+              legend: {
+                  visible: false
+              },
+              chartArea: {
+                  background: ""
+              },
+              seriesDefaults: {
+                  labels: {
+                      visible: true,
+                      background: "transparent",
+                      template: "#= category #: #= value#%"
+                  }
+              },               
+              series: [{
+                  type: "pie",
+                  startAngle: 150,
+                  field: "value",
+                  categoryField: "category"                                     
+              }],
+              tooltip: {
+                  visible: true,
+                  format: "{0}%"
+              }
+          });
+      }
+
+      $(document).ready(createPieCharts);
+      $(document).bind("kendo:skinChange", createPieCharts);
+    </script>
+</div>
+
+
+
